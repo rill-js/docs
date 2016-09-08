@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: #33a0c0;
+  color: #00a9e6;
 }
 
 section {
@@ -31,7 +31,7 @@ section:not(:last-child) {
 }
 
 section:not(#top) {
-  padding: 150px 100px;
+  padding: 50px 25px;
   text-align: center;
 }
 
@@ -39,7 +39,6 @@ pre {
   background: white;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  padding: 25px;
   font-size: .9em;
   font-family: monospace;
   overflow-x: auto;
@@ -57,7 +56,6 @@ p {
 code {
   font-family: monospace;
   font-size: .9em;
-  color: #277c95;
 }
 
 h1 {
@@ -175,11 +173,11 @@ section:nth-child(2n) {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 700px) {
-  section:not(#top) {
-    padding: 50px 25px;
-  }
+h1[align="center"] {
+  display: none;
+}
 
+@media screen and (max-width: 700px) {
   #heading {
     margin-top: -75px;
   }
