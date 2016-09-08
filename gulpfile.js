@@ -28,7 +28,8 @@ gulp.task('watch', done => {
   const cp = require('child_process')
   let p = null
   done = finishOnce(done)
-  start(() => {})
+  start(() => {
+  })
 
   // Start browser sync.
   global.BS = require('browser-sync').create()
@@ -121,23 +122,22 @@ gulp.task('build:client', () => {
 /**
  * Build and compress css.
  */
- gulp.task('build:css', function () {
-   var cssmin = require('cssnano')
-   var concat = require('gulp-concat')
-   var postcss = require('gulp-postcss')
+gulp.task('build:css', function () {
+  var cssmin = require('cssnano')
+  var concat = require('gulp-concat')
+  var postcss = require('gulp-postcss')
 
-   return gulp.src(PATHS.IN + '/css/*.css')
-     .pipe(plumber({ errorHandler: errorHandler }))
-     .pipe(sourcemaps.init())
-     .pipe(concat('index.css'))
-     .pipe(postcss([cssmin()]))
-     .pipe(sourcemaps.write('.'))
-     .pipe(gulp.dest(PATHS.CLIENT))
-     .pipe(IS_PRODUCTION ? gzip() : util.noop())
-     .pipe(IS_PRODUCTION ? gulp.dest(PATHS.CLIENT) : util.noop())
-     .pipe(global.BS ? global.BS.stream() : util.noop())
- })
-
+  return gulp.src(PATHS.IN + '/css/*.css')
+    .pipe(plumber({ errorHandler: errorHandler }))
+    .pipe(sourcemaps.init())
+    .pipe(concat('index.css'))
+    .pipe(postcss([cssmin()]))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(PATHS.CLIENT))
+    .pipe(IS_PRODUCTION ? gzip() : util.noop())
+    .pipe(IS_PRODUCTION ? gulp.dest(PATHS.CLIENT) : util.noop())
+    .pipe(global.BS ? global.BS.stream() : util.noop())
+})
 
 /**
  * Builds static files.

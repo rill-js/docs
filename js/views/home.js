@@ -1,5 +1,4 @@
 import html from 'as-html'
-import redirect from '@rill/redirect'
 import { stringify } from 'circular-json'
 import { decode } from 'he'
 import docs from '../docs'
@@ -28,7 +27,7 @@ export default (app) => {
 }
 
 function replaceCtxProps (str, ctx) {
-  var ctx = shallowCopy(ctx)
+  ctx = shallowCopy(ctx)
   ctx.req = shallowCopy(ctx.req)
   ctx.res = shallowCopy(ctx.res)
 
@@ -39,7 +38,7 @@ function replaceCtxProps (str, ctx) {
   ctx.res.original = '[ServerResponse]'
 
   return String(str).replace(matchCtxLiteral, (match, prop, val) => {
-    return match.replace(val, stringify(eval(decode(prop)), null, 4))
+    return match.replace(val, stringify(eval(decode(prop)), null, 4)) // eslint-disable-line
   })
 }
 
