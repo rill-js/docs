@@ -1,5 +1,4 @@
 import { stringify } from 'circular-json'
-import { decode } from 'he'
 const matchCtxLiteral = /(ctx\.[^ ;]+);? ?\/\/ (.*)?/g
 
 /**
@@ -18,7 +17,7 @@ export default function insertLiveExamples (str, ctx) {
   ctx.res.original = '[ServerResponse]'
 
   return String(str).replace(matchCtxLiteral, (match, prop, val) => {
-    return match.replace(val, stringify(eval(decode(prop)), null, 4)) // eslint-disable-line
+    return match.replace(val, stringify(eval(prop), null, 4)) // eslint-disable-line
   })
 }
 

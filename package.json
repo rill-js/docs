@@ -36,8 +36,6 @@
     "auto-sni": "^1.5.1",
     "babel-polyfill": "^6.13.0",
     "circular-json": "^0.3.1",
-    "classnames": "^2.2.5",
-    "he": "^1.1.0",
     "highlight.js": "^9.6.0",
     "marked": "^0.3.6",
     "raf": "^3.3.0",
