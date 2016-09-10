@@ -29,7 +29,6 @@
   "dependencies": {
     "@rill/html": "^2.3.0",
     "@rill/logger": "^1.2.1",
-    "@rill/progress": "^1.1.0",
     "@rill/redirect": "^1.0.0",
     "@rill/set": "^1.1.0",
     "@rill/static": "^1.0.0",
