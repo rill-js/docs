@@ -4,12 +4,15 @@ import bash from 'highlight.js/lib/languages/bash'
 import html from 'highlight.js/lib/languages/xml'
 import javascript from 'highlight.js/lib/languages/javascript'
 
+// Setup highlight.js languages.
 hljs.registerLanguage('bash', bash)
 hljs.registerLanguage('console', bash)
 hljs.registerLanguage('html', html)
+hljs.registerLanguage('xml', html)
 hljs.registerLanguage('js', javascript)
 hljs.registerLanguage('javascript', javascript)
 
+// Setup custom renderer for marked which uses highlight.js for syntax highlighting.
 const renderer = new marked.Renderer()
 renderer.code = (code, lang) => {
   lang = lang.toLowerCase()
@@ -18,4 +21,9 @@ renderer.code = (code, lang) => {
 }
 marked.setOptions({ renderer })
 
-export const markdown = text => marked(text)
+/**
+ * Parses text as markdown using marked.js and the custom renderer above.
+ */
+export default function markdown (text) {
+  return marked(text)
+}

@@ -1,49 +1,23 @@
+import fs from 'fs'
+import path from 'path'
 import html from 'as-html'
-import { stringify } from 'circular-json'
-import { decode } from 'he'
-import docs from '../docs'
-import { markdown } from '../helpers'
+import markdown from '../utils/markdown'
+import insertLiveExamples from '../utils/insert-live-examples'
 
-const matchCtxLiteral = /(ctx\.[^ ;]+);? ?\/\/ (.*)?/g
+const text = fs.readFileSync(path.join(__dirname, '../../node_modules/rill/README.md'), 'utf8')
+const markedText = markdown(text)
 
-export default (app) => {
-  Object.keys(docs).forEach(pathname => {
-    const text = markdown(docs[pathname])
-    app.get(pathname, (ctx) => {
-      ctx.res.body = html`
-        <section id="docs">
-          <div class="content">
-            !${pathname === '/' && (
-              html`
-                <h1>What is Rill?</h1>
-              `
-            )}
-            !${replaceCtxProps(text, ctx)}
-          </div>
-        </section>
-      `
-    })
+export default app => {
+  // Setup the homepage renderer at path '/'.
+  app.get('/', ctx => {
+    const { res } = ctx
+    res.body = html`
+      <section id="docs">
+        <div class="content">
+          <h1>What is Rill?</h1>
+          !${insertLiveExamples(markedText, ctx)}
+        </div>
+      </section>
+    `
   })
-}
-
-function replaceCtxProps (str, ctx) {
-  ctx = shallowCopy(ctx)
-  ctx.req = shallowCopy(ctx.req)
-  ctx.res = shallowCopy(ctx.res)
-
-  // Remove circular references.
-  ctx.req.ctx = '[Circular Reference]'
-  ctx.req.original = '[IncommingRequest]'
-  ctx.res.ctx = '[Circular Reference]'
-  ctx.res.original = '[ServerResponse]'
-
-  return String(str).replace(matchCtxLiteral, (match, prop, val) => {
-    return match.replace(val, stringify(eval(decode(prop)), null, 4)) // eslint-disable-line
-  })
-}
-
-function shallowCopy (obj) {
-  const result = {}
-  for (let key in obj) result[key] = obj[key]
-  return result
 }

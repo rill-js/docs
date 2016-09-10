@@ -13,19 +13,19 @@ import rill from 'rill'
 // Middleware
 import serve from '@rill/static'
 import logger from '@rill/logger'
-import progress from '@rill/progress'
 import html from '@rill/html'
 
 // Subroutes
+import middleware from './middleware'
 import wrappers from './wrappers'
 import views from './views'
 
 // Create app
 export default rill()
   .use(serve('.build/client', { gzip: true, cache: 6.048e8 }))
-  .use(progress({ color: '#00a9e6', spinner: false }))
   .use(logger())
   .use(html())
+  .setup(middleware)
   .setup(wrappers)
   .setup(views)
   .listen(() => {
