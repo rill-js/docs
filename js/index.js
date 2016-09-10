@@ -22,7 +22,7 @@ import views from './views'
 
 // Create app
 export default rill()
-  .use(serve('.build/client', { gzip: true, cache: 6.048e8 }))
+  .use(serve('.build/client', { gzip: true, cache: '7 days' }))
   .use(logger())
   .use(html())
   .setup(middleware)
