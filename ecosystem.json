@@ -17,7 +17,7 @@
       "ref": "origin/master",
       "repo": "git@github.com:rill-js/docs.git",
       "path": "/home/app/docs",
-      "post-deploy": "npm install --production && pm2 startOrGracefulReload package.json"
+      "post-deploy": "npm install --production && pm2 startOrGracefulReload ecosystem.json"
     }
   },
 }
