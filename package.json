@@ -88,10 +88,12 @@
   "scripts": {
     "build": "npm run remove:build && gulp build",
     "build:production": "NODE_ENV=production npm run build",
+    "deploy:production": "pm2 deploy ecosystem.json production",
     "lint": "standard --verbose | snazzy",
     "precommit": "npm run build:production && npm test && git add ./.build --all",
     "remove:build": "rm -rf ./.build",
     "remove:gzip": "rm -rf ./.build/client/*.gz",
+    "setup:production": "pm2 deploy ecosystem.json production setup",
     "start": "node run",
     "watch": "npm run remove:gzip && gulp watch"
   },
