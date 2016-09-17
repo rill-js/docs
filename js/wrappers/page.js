@@ -69,6 +69,14 @@ export default (app) => {
 
             <style>${theme}</style>
             <script src="/index.js"></script>
+            <script>
+              !function(a,p,i,d,o,c,s){a.GoogleAnalyticsObject=i;a[i]||(a[i]=function(){
+              (a[i].q=a[i].q||[]).push(arguments)});a[i].l=+new Date;c=p.createElement(d);
+              s=p.getElementsByTagName(d)[0];c.src=o;s.parentNode.insertBefore(c,s)}
+              (window,document,'ga','script','//www.google-analytics.com/analytics.js');
+              ga('create', 'UA-53202133-2', 'auto');
+              ga('send', 'pageview');
+            </script>
           </body>
         </html>
       `
