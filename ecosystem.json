@@ -1,0 +1,23 @@
+{
+  "apps": [
+    {
+      "name": "DOCS",
+      "script": "run.js",
+      "exec_mode": "cluster",
+      "instances": "max",
+      "post_update": [
+        "npm install --production"
+      ]
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "app",
+      "host": "159.203.52.31",
+      "ref": "origin/master",
+      "repo": "git@github.com:rill-js/docs.git",
+      "path": "/home/app/docs",
+      "post-deploy": "npm install --production && pm2 startOrGracefulReload package.json"
+    }
+  },
+}

@@ -3,7 +3,6 @@
   "description": "Documentation website for Rill",
   "version": "0.0.1",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
-  "private": true,
   "babel": {
     "presets": [
       "latest"
@@ -81,6 +80,7 @@
   ],
   "license": "MIT",
   "main": "js/app.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rill-js/docs.git"
