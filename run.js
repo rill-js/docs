@@ -21,7 +21,7 @@ module.exports = (IS_DEV
     email: 'pierceydylan@gmail.com',
     agreeTos: true,
     debug: env.NODE_ENV !== 'production',
-    domains: [['www.rill.tech', 'rill.tech']],
+    domains: [['www.rill.tech', 'rill.tech'], ['www.rill.site', 'rill.site']],
     ports: {
       http: env.HTTP_PORT,
       https: env.HTTPS_PORT
