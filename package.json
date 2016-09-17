@@ -27,7 +27,7 @@
     "url": "https://github.com/rill-js/docs/issues"
   },
   "dependencies": {
-    "@rill/html": "^2.3.0",
+    "@rill/html": "^3.0.0",
     "@rill/logger": "^1.2.1",
     "@rill/redirect": "^1.0.0",
     "@rill/set": "^1.1.0",
@@ -38,7 +38,7 @@
     "highlight.js": "^9.6.0",
     "marked": "^0.3.6",
     "raf": "^3.3.0",
-    "rill": "^2.0.0",
+    "rill": "^2.1.2",
     "scroll-behaviour": "^0.3.3",
     "source-map-support": "^0.4.2"
   },
@@ -49,7 +49,7 @@
     "babel-plugin-transform-inline-environment-variables": "^6.8.0",
     "babel-preset-latest": "^6.14.0",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.15.0",
+    "browser-sync": "^2.16.0",
     "bundle-collapser": "^1.2.1",
     "cssnano": "3.7.4",
     "del": "^2.2.2",
@@ -68,8 +68,8 @@
     "husky": "^0.11.7",
     "isbrowser": "0.1.0",
     "pretty-error": "^2.0.0",
-    "snazzy": "^4.0.1",
-    "standard": "^8.0.0"
+    "snazzy": "^5.0.0",
+    "standard": "^8.1.0"
   },
   "homepage": "https://github.com/rill-js/docs#readme",
   "keywords": [
