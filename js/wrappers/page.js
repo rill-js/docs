@@ -21,6 +21,9 @@ export default (app) => {
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
             <meta name="description" content="${locals.description}"/>
             <title>${locals.title}</title>
+            <meta property="og:title" content="${locals.title}"/>
+            <meta property="og:url" content="${req.href}"/>
+            <meta property="og:image" content="https://raw.githubusercontent.com/rill-js/rill/master/Rill-Logo.jpg"/>
             <link rel="shortcut icon" href="/favicon.png"/>
             <link rel="stylesheet" href="/index.css"/>
           </head>
