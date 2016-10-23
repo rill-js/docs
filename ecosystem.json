@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "DOCS",
-      "script": "run.js",
+      "script": "server.js",
       "exec_mode": "cluster",
       "instances": "max",
       "post_update": [
