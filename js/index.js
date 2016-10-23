@@ -45,7 +45,8 @@ export default rill()
   }))
   .use(helmet.hsts({
     maxAge: ms('90 days'),
-    includeSubdomains: true
+    includeSubdomains: true,
+    force: true
   }))
   .use(helmet.ieNoOpen())
   .use(helmet.noSniff())
