@@ -90,7 +90,7 @@
     "build:production": "NODE_ENV=production GIT_COMMIT=$(git rev-parse HEAD) gulp build && gulp compress",
     "deploy:production": "pm2 deploy ecosystem.json production",
     "lint": "standard --verbose | snazzy",
-    "precommit": "npm run build:production && npm test && git add ./.build --all",
+    "precommit": "npm run build:production && npm lint && git add ./.build --all",
     "setup:production": "pm2 deploy ecosystem.json production setup",
     "start": "node server.js",
     "watch": "rm -rf ./.build/client/*.gz && gulp"
