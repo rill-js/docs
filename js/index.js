@@ -9,6 +9,7 @@ import 'scroll-behaviour/polyfill'
 
 // Libraries
 import rill from 'rill'
+import ms from 'ms'
 
 // Middleware
 import helmet from '@rill/helmet'
@@ -25,7 +26,30 @@ import views from './views'
 
 // Create app
 export default rill()
-  .use(helmet())
+  .use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com'],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:', 'rill.site', 'img.shields.io', 'badge-size.herokuapp.com', 'camo.githubusercontent.com', 'www.google-analytics.com'],
+      sandbox: ['allow-same-origin', 'allow-scripts']
+    }
+  }))
+  .use(helmet.dnsPrefetchControl())
+  .use(helmet.frameguard())
+  .use(helmet.hidePoweredBy())
+  .use(helmet.hpkp({
+    maxAge: ms('90 days'),
+    sha256s: ['AbCdEf123=', 'ZyXwVu456=']
+  }))
+  .use(helmet.hsts({
+    maxAge: ms('90 days'),
+    includeSubdomains: true
+  }))
+  .use(helmet.ieNoOpen())
+  .use(helmet.noSniff())
+  .use(helmet.xssFilter())
   .use(serve('.build/client', { gzip: true, cache: '7 days' }))
   .use(logger())
   .use(html())

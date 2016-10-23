@@ -26,7 +26,7 @@
     "url": "https://github.com/rill-js/docs/issues"
   },
   "dependencies": {
-    "@rill/helmet": "^1.0.0",
+    "@rill/helmet": "^1.0.1",
     "@rill/html": "^5.0.0",
     "@rill/logger": "^2.1.1",
     "@rill/redirect": "^1.0.0",
@@ -37,6 +37,7 @@
     "babel-polyfill": "^6.16.0",
     "highlight.js": "^9.7.0",
     "marked": "^0.3.6",
+    "ms": "^0.7.1",
     "raf": "^3.3.0",
     "rill": "^2.4.0",
     "scroll-behaviour": "^0.3.3",
