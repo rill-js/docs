@@ -1,7 +1,7 @@
 {
   "name": "@rill/docs",
   "description": "Documentation website for Rill",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "babel": {
     "presets": [
@@ -9,8 +9,8 @@
     ],
     "plugins": [
       "transform-inline-environment-variables",
-      "git-version",
-      "static-fs"
+      "static-fs",
+      "as-html"
     ]
   },
   "browserify": {
@@ -26,49 +26,49 @@
     "url": "https://github.com/rill-js/docs/issues"
   },
   "dependencies": {
-    "@rill/html": "^3.0.0",
-    "@rill/logger": "^1.2.1",
+    "@rill/helmet": "^1.0.0",
+    "@rill/html": "^5.0.0",
+    "@rill/logger": "^2.1.1",
     "@rill/redirect": "^1.0.0",
     "@rill/set": "^1.1.0",
-    "@rill/static": "^1.0.0",
-    "as-html": "^2.0.0",
+    "@rill/static": "^2.0.0",
+    "as-html": "^2.0.1",
     "auto-sni": "^1.5.1",
-    "babel-polyfill": "^6.13.0",
-    "highlight.js": "^9.6.0",
+    "babel-polyfill": "^6.16.0",
+    "highlight.js": "^9.7.0",
     "marked": "^0.3.6",
     "raf": "^3.3.0",
-    "rill": "^2.1.4",
+    "rill": "^2.4.0",
     "scroll-behaviour": "^0.3.3",
-    "source-map-support": "^0.4.2"
+    "source-map-support": "^0.4.5"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
-    "babel-plugin-git-version": "^0.1.4",
+    "babel-plugin-as-html": "^1.0.0",
     "babel-plugin-static-fs": "^1.1.0",
     "babel-plugin-transform-inline-environment-variables": "^6.8.0",
-    "babel-preset-latest": "^6.14.0",
+    "babel-preset-latest": "^6.16.0",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.16.0",
+    "browser-sync": "^2.17.5",
     "bundle-collapser": "^1.2.1",
-    "cssnano": "3.7.4",
-    "del": "^2.2.2",
+    "cssnano": "3.8.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
-    "gulp-bro": "^0.3.0",
+    "gulp-bro": "^0.3.1",
+    "gulp-changed": "^1.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-gzip": "^1.4.0",
-    "gulp-header": "^1.8.8",
     "gulp-imagemin": "^3.0.3",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.2.0",
-    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-prune": "^0.2.0",
+    "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
-    "husky": "^0.11.7",
+    "husky": "^0.11.9",
     "isbrowser": "0.1.0",
-    "pretty-error": "^2.0.0",
+    "pretty-error": "^2.0.2",
     "snazzy": "^5.0.0",
-    "standard": "^8.1.0"
+    "standard": "^8.4.0"
   },
   "homepage": "https://github.com/rill-js/docs#readme",
   "keywords": [
@@ -86,24 +86,18 @@
     "url": "git+https://github.com/rill-js/docs.git"
   },
   "scripts": {
-    "build": "npm run remove:build && gulp build",
-    "build:production": "NODE_ENV=production npm run build",
+    "build": "gulp build",
+    "build:production": "NODE_ENV=production GIT_COMMIT=$(git rev-parse HEAD) gulp build && gulp compress",
     "deploy:production": "pm2 deploy ecosystem.json production",
     "lint": "standard --verbose | snazzy",
     "precommit": "npm run build:production && npm test && git add ./.build --all",
-    "remove:build": "rm -rf ./.build",
-    "remove:gzip": "rm -rf ./.build/client/*.gz",
     "setup:production": "pm2 deploy ecosystem.json production setup",
-    "start": "node run",
-    "watch": "npm run remove:gzip && gulp watch"
+    "start": "node server.js",
+    "watch": "rm -rf ./.build/client/*.gz && gulp"
   },
   "standard": {
-    "parser": "babel-eslint",
     "ignore": [
       ".build"
-    ],
-    "globals": [
-      "GIT_COMMIT"
     ]
   }
 }

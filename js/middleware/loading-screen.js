@@ -2,11 +2,11 @@ import url from 'url'
 
 // Creates a Promise that will wait for `ms`.
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-let started = !process.browser
+let started = false
 
 // This middleware will bring up the loading screen when needed in the browser.
 export default function loadingScreen ({ req }, next) {
-  if (!started) {
+  if (!process.browser || !started) {
     started = true
     return next()
   }

@@ -10,3 +10,6 @@ npm-debug.log
 
 # Tasks
 .imdone
+
+# Build
+.buildcache

@@ -1,5 +1,5 @@
-import page from './page'
+import rill from 'rill'
+import pageWrapper from './page'
 
-export default app => {
-  app.setup(page)
-}
+export default rill()
+  .get('/*', pageWrapper)
