@@ -32,7 +32,7 @@ export default rill()
       scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com'],
       styleSrc: ["'self'", "'unsafe-inline'"],
       fontSrc: ["'self'"],
-      imgSrc: ["'self'", 'data:', 'rill.site', 'img.shields.io', 'badge-size.herokuapp.com', 'camo.githubusercontent.com', 'www.google-analytics.com'],
+      imgSrc: ["'self'", 'data:', 'rill.site', 'img.shields.io', 'badge-size.herokuapp.com', 'camo.githubusercontent.com', 'www.google-analytics.com', 'stats.g.doubleclick.net'],
       sandbox: ['allow-same-origin', 'allow-scripts']
     }
   }))
