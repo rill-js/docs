@@ -1,7 +1,36 @@
+const ms = require('ms')
 const env = process.env
 const IS_DEV = env.NODE_ENV == null
 env.HTTP_PORT = env.HTTP_PORT || 3002
 env.HTTPS_PORT = env.HTTPS_PORT || 3003
+global.SECURITY = !IS_DEV && {
+  noSniff: true,
+  ieNoOpen: true,
+  xssFilter: true,
+  frameguard: true,
+  hidePoweredBy: true,
+  referrerPolicy: true,
+  dnsPrefetchControl: true,
+  hpkp: {
+    maxAge: ms('90 days'),
+    sha256s: ['AbCdEf123=', 'ZyXwVu456='] // TODO: Update once live to actual keys.
+  },
+  hsts: {
+    maxAge: ms('90 days'),
+    includeSubdomains: true,
+    force: true
+  },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", '"unsafe-eval"', 'www.google-analytics.com'],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:', 'rill.site', 'img.shields.io', 'badge-size.herokuapp.com', 'camo.githubusercontent.com', 'www.google-analytics.com', 'stats.g.doubleclick.net'],
+      sandbox: ['allow-same-origin', 'allow-scripts']
+    }
+  }
+}
 
 if (IS_DEV) {
   // Setup sourcemaps.
