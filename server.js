@@ -23,7 +23,7 @@ global.SECURITY = !IS_DEV && {
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", '"unsafe-eval"', 'www.google-analytics.com'],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'www.google-analytics.com'],
       styleSrc: ["'self'", "'unsafe-inline'"],
       fontSrc: ["'self'"],
       imgSrc: ["'self'", 'data:', 'rill.site', 'img.shields.io', 'badge-size.herokuapp.com', 'camo.githubusercontent.com', 'www.google-analytics.com', 'stats.g.doubleclick.net'],
