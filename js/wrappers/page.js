@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import html from 'as-html'
-const VERSION = process.env.GIT_COMMIT
+const VERSION = process.env.VERSION
 const THEME = fs.readFileSync(path.join(__dirname, '../../node_modules/highlight.js/styles/ocean.css'), 'utf8')
 
 /**
