@@ -1,7 +1,3 @@
-// Startup message.
-const STARTUP_MESSAGE = 'Started Server'
-console.time(STARTUP_MESSAGE)
-
 // Polyfills
 import 'babel-polyfill'
 import 'raf/polyfill'
@@ -22,6 +18,10 @@ import loadingScreen from './middleware/loading-screen'
 // Subroutes
 import wrappers from './wrappers'
 import views from './views'
+
+// Startup message.
+const STARTUP_MESSAGE = 'Started Server'
+console.time(STARTUP_MESSAGE)
 
 // Create app
 export default rill()
