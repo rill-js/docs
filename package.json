@@ -33,8 +33,8 @@
     "@rill/set": "^1.1.0",
     "@rill/static": "^2.0.0",
     "as-html": "^2.0.1",
-    "auto-sni": "^1.6.0",
     "babel-polyfill": "^6.23.0",
+    "greenlock-koa": "^2.0.3",
     "highlight.js": "^9.10.0",
     "marked": "^0.3.6",
     "mini-url": "^1.6.1",
@@ -89,7 +89,7 @@
   },
   "scripts": {
     "build": "gulp build",
-    "build:production": "NODE_ENV=production VERSION=1 gulp build && gulp compress",
+    "build:production": "NODE_ENV=production VERSION=2 gulp build && gulp compress",
     "deploy:production": "pm2 deploy ecosystem.json production",
     "lint": "standard --verbose | snazzy",
     "precommit": "npm run lint && git add ./.build --all",

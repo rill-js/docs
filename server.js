@@ -55,17 +55,37 @@ if (IS_DEV) {
 }
 
 // Expose server.
+const http = require('http')
+const https = require('https')
 const app = require('./.build/server').default
-module.exports = (IS_DEV
-  ? require('http').createServer().listen(env.HTTP_PORT)
-  : require('auto-sni')({
-    email: 'pierceydylan@gmail.com',
+
+if (IS_DEV) {
+  http.createServer().listen(env.HTTP_PORT)
+} else {
+  const le = require('greenlock-koa').create({
+    debug: true,
     agreeTos: true,
-    debug: env.NODE_ENV !== 'production',
-    domains: [['www.rill.tech', 'rill.tech'], ['www.rill.site', 'rill.site']],
-    ports: {
-      http: env.HTTP_PORT,
-      https: env.HTTPS_PORT
-    }
+    server: 'production',
+    configDir: require('os').homedir() + '/letsencrypt/etc',
+    approveDomains: ['www.rill.tech', 'rill.tech', 'www.rill.site', 'rill.site']
   })
-).on('request', app.emit.bind(app, 'request'))
+
+  http
+    .createServer(le.middleware(forceHTTPS))
+    .listen(80)
+  https
+    .createServer(le.httsOptions, le.middleware())
+    .on('request', app.emit.bind(app, 'request'))
+    .listen(443)
+}
+
+function forceHTTPS (req, res) {
+  // Automatically ensure that each request is handled with https.
+  if (req.headers.host) {
+    res.writeHead(302, {
+      'Location': 'https://' + req.headers.host.split(':')[0] + ':443' + req.url
+    })
+  }
+
+  res.end()
+}
