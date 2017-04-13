@@ -34,7 +34,7 @@
     "@rill/static": "^2.0.0",
     "as-html": "^2.0.1",
     "babel-polyfill": "^6.23.0",
-    "greenlock-koa": "^2.0.3",
+    "greenlock-express": "^2.0.9",
     "highlight.js": "^9.10.0",
     "marked": "^0.3.6",
     "mini-url": "^1.6.1",
