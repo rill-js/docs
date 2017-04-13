@@ -55,18 +55,20 @@ if (IS_DEV) {
 }
 
 // Expose server.
-const app = require('./.build/server').default.listeners('request')[0]
+const app = require('./.build/server').default
 
 if (IS_DEV) {
-  require('http').createServer(app).listen(env.HTTP_PORT)
+  require('http')
+    .createServer(app.emit.bind(app, 'request'))
+    .listen(env.HTTP_PORT)
 } else {
-  require('greenlock-express').create({
-    app: app,
-    debug: true,
+  require('auto-sni')({
     agreeTos: true,
-    server: 'production',
     email: 'pierceydylan@gmail.com',
-    configDir: require('os').homedir() + '/letsencrypt/etc',
-    approveDomains: ['www.rill.tech', 'rill.tech', 'www.rill.site', 'rill.site']
-  }).listen(80, 443)
+    domains: ['www.rill.tech', 'rill.tech', 'www.rill.site', 'rill.site'],
+    ports: {
+      http: env.HTTP_PORT,
+      https: env.HTTPS_PORT
+    }
+  }, app)
 }
