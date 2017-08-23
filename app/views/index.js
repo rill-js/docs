@@ -36,11 +36,9 @@ export default router()
     return next()
   })
   .get('/', render(homePage))
-  .get('/docs/:section?', (ctx, next) => {
-    const { load, locals, req } = ctx
-    const section = req.params.section || 'application'
+  .get('/:section', ({ load, locals, req }, next) => {
+    const { section } = req.params
     if (!['application', 'context', 'request', 'response'].includes(section)) return
-    locals.ctx = ctx
     locals.pendingContent = load('docs', section)
     return next()
   }, render(docsPage))
