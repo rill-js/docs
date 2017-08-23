@@ -1,0 +1,13 @@
+import markdown from '../utilities/markdown'
+
+<div>
+  <app-page>
+    <section id="docs">
+      <div class="content">
+        <await (content from input.pendingContent)>
+          $!{markdown(content)}
+        </await>
+      </div>
+    </section>
+  </app-page>
+</div>

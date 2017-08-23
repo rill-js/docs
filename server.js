@@ -1,9 +1,6 @@
 const ms = require('ms')
-const env = process.env
-const IS_DEV = env.NODE_ENV == null
-env.HTTP_PORT = env.HTTP_PORT || 3002
-env.HTTPS_PORT = env.HTTPS_PORT || 3003
-global.SECURITY = !IS_DEV && {
+
+global.SECURITY = {
   noSniff: true,
   ieNoOpen: true,
   xssFilter: true,
@@ -13,7 +10,7 @@ global.SECURITY = !IS_DEV && {
   dnsPrefetchControl: true,
   hpkp: {
     maxAge: ms('90 days'),
-    sha256s: ['AbCdEf123=', 'ZyXwVu456='] // TODO: Update once live to actual keys.
+    sha256s: ['AbCdEf123=', 'ZyXwVu456=']
   },
   hsts: {
     maxAge: ms('90 days'),
@@ -32,43 +29,14 @@ global.SECURITY = !IS_DEV && {
   }
 }
 
-if (IS_DEV) {
-  // Setup sourcemaps.
-  require('source-map-support').install({ hookRequire: true })
-  // Handle uncaught exceptions.
-  const PrettyError = require('pretty-error')
-  const pe = new PrettyError()
-    .skipNodeFiles()
-    .skipPackage('rill')
-    .skipPackage('@rill')
-    .skipPackage('regenerator-runtime')
-  process.once('uncaughtException', (err) => {
-    console.log(pe.render(err))
-    process.send && process.send('error')
-  })
-
-  // Override console.error for prettier messages.
-  const originalError = console.error
-  console.error = (err) => {
-    originalError.call(console, pe.render(err))
+// Start secure server.
+const app = require('./build').default
+require('auto-sni')({
+  agreeTos: true,
+  email: 'pierceydylan@gmail.com',
+  domains: ['www.rill.tech', 'rill.tech', 'www.rill.site', 'rill.site'],
+  ports: {
+    http: process.env.HTTP_PORT,
+    https: process.env.HTTPS_PORT
   }
-}
-
-// Expose server.
-const app = require('./.build/server').default
-
-if (IS_DEV) {
-  require('http')
-    .createServer(app.emit.bind(app, 'request'))
-    .listen(env.HTTP_PORT)
-} else {
-  require('auto-sni')({
-    agreeTos: true,
-    email: 'pierceydylan@gmail.com',
-    domains: ['www.rill.tech', 'rill.tech', 'www.rill.site', 'rill.site'],
-    ports: {
-      http: env.HTTP_PORT,
-      https: env.HTTPS_PORT
-    }
-  }, app)
-}
+}, app.emit.bind(app, 'request'))

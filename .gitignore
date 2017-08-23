@@ -1,15 +1,12 @@
-# Editor
+# Sublime
 *.sublime*
 
 # OSX
 *.DS_Store
 
+# Code Coverage
+coverage
+
 # NPM
 node_modules
 npm-debug.log
-
-# Tasks
-.imdone
-
-# Build
-.buildcache

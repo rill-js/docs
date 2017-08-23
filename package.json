@@ -1,105 +1,70 @@
 {
-  "name": "@rill/docs",
-  "description": "Documentation website for Rill",
-  "version": "0.0.2",
+  "name": "@rill/boilerplate-webpack-marko",
+  "description": "An isomorphic boilerplate using marko, webpack and rill.",
+  "version": "0.0.1",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
-  "babel": {
-    "presets": [
-      "latest"
-    ],
-    "plugins": [
-      "transform-inline-environment-variables",
-      "static-fs",
-      "as-html"
-    ]
-  },
-  "browserify": {
-    "transform": [
-      "babelify",
-      "isbrowser"
-    ],
-    "plugin": [
-      "bundle-collapser/plugin"
-    ]
-  },
-  "bugs": {
-    "url": "https://github.com/rill-js/docs/issues"
+  "browser": {
+    "./api/index.js": false
   },
   "dependencies": {
-    "@rill/helmet": "^1.0.2",
-    "@rill/html": "^5.2.3",
-    "@rill/logger": "^2.1.1",
+    "@rill/body": "^1.2.3",
+    "@rill/compress": "^1.0.5",
+    "@rill/etag": "^1.1.1",
+    "@rill/expose": "^1.0.0",
+    "@rill/fetcher": "^4.1.0",
+    "@rill/fresh": "^1.0.1",
+    "@rill/helmet": "^1.2.0",
+    "@rill/loader": "^2.2.1",
+    "@rill/logger": "^2.1.2",
+    "@rill/marko": "^0.3.1",
+    "@rill/page": "^3.0.0",
+    "@rill/progress": "^2.0.4",
     "@rill/redirect": "^1.0.0",
-    "@rill/set": "^1.1.0",
+    "@rill/session": "^9.1.0",
     "@rill/static": "^2.0.0",
-    "as-html": "^2.0.1",
-    "auto-sni": "^2.1.1",
-    "babel-polyfill": "^6.23.0",
-    "highlight.js": "^9.10.0",
+    "@rill/unhandled": "^1.0.0",
+    "auto-sni": "^2.3.1",
+    "highlight.js": "^9.12.0",
     "marked": "^0.3.6",
-    "mini-url": "^1.6.1",
-    "ms": "^1.0.0",
-    "raf": "^3.3.0",
-    "rill": "^4.3.3",
-    "scroll-behaviour": "^0.3.3",
-    "source-map-support": "^0.4.14"
+    "ms": "^2.0.0",
+    "rill": "^5.0.15",
+    "source-map-support": "^0.4.16"
   },
   "devDependencies": {
-    "babel-plugin-as-html": "^1.0.0",
-    "babel-plugin-static-fs": "^1.1.0",
-    "babel-plugin-transform-inline-environment-variables": "^6.8.0",
-    "babel-preset-latest": "^6.24.1",
-    "babelify": "^7.3.0",
-    "browser-sync": "^2.18.8",
-    "bundle-collapser": "^1.2.1",
-    "cssnano": "3.10.0",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-babel": "^6.1.2",
-    "gulp-bro": "^1.0.2",
-    "gulp-changed": "^3.0.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-gzip": "^1.4.0",
-    "gulp-imagemin": "^3.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.4.0",
-    "gulp-prune": "^0.2.0",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-uglify": "^2.1.2",
-    "gulp-util": "^3.0.8",
-    "husky": "^0.13.3",
-    "isbrowser": "0.1.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babili-webpack-plugin": "^0.1.1",
+    "compression-webpack-plugin": "^1.0.0",
+    "css-loader": "^0.28.5",
+    "csso-webpack-plugin": "^1.0.0-beta.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "husky": "^0.14.3",
+    "ignore-emit-webpack-plugin": "^0.2.1",
+    "imagemin-webpack-plugin": "^1.4.4",
+    "marko": "^4.4.26",
+    "marko-loader": "^1.3.1",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.6",
     "pretty-error": "^2.1.0",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.1"
+    "raw-loader": "^0.5.1",
+    "spawn-server-webpack-plugin": "^2.0.5",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   },
-  "homepage": "https://github.com/rill-js/docs#readme",
-  "keywords": [
-    "docs",
-    "documentation",
-    "isomorphic",
-    "rill",
-    "universal"
-  ],
+  "keywords": [],
   "license": "MIT",
-  "main": "js/app.js",
+  "main": "bould/index.js",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rill-js/docs.git"
-  },
   "scripts": {
-    "build": "gulp build",
-    "build:production": "NODE_ENV=production VERSION=2 gulp build && gulp compress",
-    "deploy:production": "pm2 deploy ecosystem.json production",
-    "lint": "standard --verbose | snazzy",
-    "precommit": "npm run lint && git add ./.build --all",
-    "setup:production": "pm2 deploy ecosystem.json production setup",
-    "start": "node server.js",
-    "watch": "rm -rf ./.build/client/*.gz && gulp"
-  },
-  "standard": {
-    "ignore": [
-      ".build"
-    ]
+    "build": "webpack --progress --config ./config/prod/webpack.config.js",
+    "precommit": "npm run build && git add ./build --all",
+    "start": "node ./server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node ./config/dev/dev-server.js"
   }
 }
