@@ -62,7 +62,9 @@
   "private": true,
   "scripts": {
     "build": "webpack --progress --config ./config/prod/webpack.config.js",
+    "deploy:production": "pm2 deploy ecosystem.json production",
     "precommit": "npm run build && git add ./build --all",
+    "setup:production": "pm2 deploy ecosystem.json production setup",
     "start": "node ./server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node ./config/dev/dev-server.js"
