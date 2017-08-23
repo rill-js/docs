@@ -19,7 +19,7 @@ global.SECURITY = {
   },
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: ["'self'", 'raw.githubusercontent.com'],
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'www.google-analytics.com'],
       styleSrc: ["'self'", "'unsafe-inline'"],
       fontSrc: ["'self'"],
