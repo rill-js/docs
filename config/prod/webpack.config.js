@@ -8,6 +8,7 @@ const MinifyJSPlugin = require('babili-webpack-plugin')
 const MinifyCSSPlugin = require('csso-webpack-plugin').default
 const MinifyImgPlugin = require('imagemin-webpack-plugin').default
 const CompressionPlugin = require('compression-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 
 const ROOT_PATH = path.join(__dirname, '../..')
 const ENTRY_FILE = path.join(ROOT_PATH, 'app/index.js')
@@ -103,7 +104,7 @@ module.exports = [
   createConfig({
     name: 'Browser',
     target: 'web',
-    entry: ENTRY_FILE,
+    entry: [require.resolve('./offline'), ENTRY_FILE],
     devtool: 'cheap-module-source-map',
     output: {
       pathinfo: false,
@@ -121,7 +122,8 @@ module.exports = [
       new MinifyJSPlugin(),
       new MinifyCSSPlugin({ sourceMap: true }),
       new MinifyImgPlugin(),
-      new CompressionPlugin()
+      new CompressionPlugin(),
+      new OfflinePlugin()
     ]
   })
 ]
